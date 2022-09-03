@@ -1,6 +1,13 @@
 const aws = require('aws-sdk');
 const dynamodb = new aws.DynamoDB.DocumentClient();
 
+/**
+ * This function is used to get the item from the table
+ * 
+ * @param {string} tableName 
+ * @param {object} params 
+ * @returns 
+ */
 const getItem = async (tableName, params) => {
     return dynamodb.get({
         TableName: tableName,
@@ -14,6 +21,13 @@ const getItem = async (tableName, params) => {
     })
 }
 
+/**
+ * This function is used to put the item into the table
+ * 
+ * @param {string} tableName 
+ * @param {object} params 
+ * @returns 
+ */
 const putItem = async (tableName, params) => {
     return dynamodb.put({
         TableName: tableName,
@@ -27,6 +41,13 @@ const putItem = async (tableName, params) => {
     })
 }
 
+/**
+ * This function is used to update the item in the table
+ * 
+ * @param {string} tableName 
+ * @param {object} params 
+ * @returns 
+ */
 const scanItem = async (tableName, params) => {
     return dynamodb.scan({
         TableName: tableName,
