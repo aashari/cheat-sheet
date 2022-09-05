@@ -22,7 +22,14 @@ const result = nestedObjectFlattening({
     },
     "error": {
         "type": "circuit_breaking_exception",
-        "reason": "[parent] Data too large, data for [indices:data/write/bulk[s]] would be [4133016152/3.8gb], which is larger than the limit of [3978238361/3.7gb], real usage: [4130339000/3.8gb], new bytes reserved: [2677152/2.5mb], usages [request=7729112/7.3mb, fielddata=7187220/6.8mb, in_flight_requests=4550214/4.3mb, accounting=48822868/46.5mb]",
+        "reason": [
+            "[parent] Data too large, data for [indices:data/write/bulk[s]] would be [4133016152/3.8gb]", 
+            "which is larger than the limit of [3978238361/3.7gb]", 
+            "real usage: [4130339000/3.8gb]", 
+            "new bytes reserved: [2677152/2.5mb]", 
+            "usages [request=7729112/7.3mb", 
+            "fielddata=7187220/6.8mb, in_flight_requests=4550214/4.3mb, accounting=48822868/46.5mb]"
+        ],
         "bytes_wanted": 4133016152,
         "bytes_limit": 3978238361,
         "durability": "PERMANENT"
