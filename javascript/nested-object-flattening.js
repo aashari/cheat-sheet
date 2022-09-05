@@ -1,53 +1,62 @@
 /**
  * This function takes a nested object and flattens it into a single level object.
  * 
- * @param {object} obj 
- * @param {boolean} lowerCaseTheKey 
+ * @param {object} data 
+ * @param {boolean} lowerCase 
  * @param {string} prefix 
  * @returns 
  */
-const nestedObjectFlattening = (obj, lowerCaseTheKey = false, prefix = '') => {
-
-    // if obj is empty
-    if (!obj) return undefined;
+const nestedObjectFlattening = (data, lowerCase = false, prefix = '', separator = '.') => {
 
     // if obj is an array, iterate over each item and recursively call nestedObjectFlattening
-    if (Array.isArray(obj)) return obj.map(item => nestedObjectFlattening(item, lowerCaseTheKey, prefix));
+    if (Array.isArray(data)) return data.map(item => nestedObjectFlattening(item, lowerCase, prefix, separator));
 
     // if obj is a date, return the date
-    if (obj instanceof Date) return obj;
+    if (data instanceof Date) return data;
 
     // if obj is a number or boolean, return the value
-    if (typeof obj === 'number' || typeof obj === 'boolean') return obj;
+    if (typeof data === 'number' || typeof data === 'boolean') return data;
+
+    // if obj is undefined or empty string or null, return undefined
+    if (data === undefined || data === '' || data === null) return undefined;
 
     // if obj is just a regular string, return the value
-    if (typeof obj === 'string') return obj;
+    if (typeof data === 'string') return data;
 
     // otherwise, create new object
-    let flattenedObject = {};
+    let result = {};
 
     // iterate over each key in the object
-    for (let key in obj) {
+    for (let attribute in data) {
+
         // generate new key
-        let newKey = `${prefix}${key}`;
+        let newKey = `${prefix}${attribute}`;
+
         // if the key should be lowercased, do so
-        if (lowerCaseTheKey) newKey = newKey.toLowerCase();
+        if (lowerCase) newKey = newKey.toLowerCase();
+
         // if value is an array, pass the value to nestedObjectFlattening
-        if (Array.isArray(obj[key])) {
-            flattenedObject[newKey] = nestedObjectFlattening(obj[key], lowerCaseTheKey, prefix);
+        if (Array.isArray(data[attribute])) {
+            result[newKey] = nestedObjectFlattening(data[attribute], lowerCase, prefix, separator);
             continue;
         }
+
         // if the value is an object, recursively call nestedObjectFlattening
-        if (typeof obj[key] === 'object') {
-            flattenedObject = { ...flattenedObject, ...nestedObjectFlattening(obj[key], lowerCaseTheKey, `${prefix}${key}.`) };
+        if (typeof data[attribute] === 'object') {
+            result = {
+                ...result,
+                ...nestedObjectFlattening(data[attribute], lowerCase, `${newKey}${separator}`, separator)
+            };
             continue;
         }
+
         // otherwise return as it is
-        flattenedObject[newKey] = nestedObjectFlattening(obj[key], lowerCaseTheKey, prefix);
+        result[newKey] = nestedObjectFlattening(data[attribute], lowerCase, prefix, separator);
+
     }
 
     // return the flattenedObject but clean it first
-    return flattenedObject;
+    return JSON.parse(JSON.stringify(result));
 
 }
 
