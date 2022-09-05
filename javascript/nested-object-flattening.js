@@ -35,23 +35,15 @@ const nestedObjectFlattening = (data, lowerCase = false, prefix = '', separator 
         // if the key should be lowercased, do so
         if (lowerCase) newKey = newKey.toLowerCase();
 
-        // if value is an array, pass the value to nestedObjectFlattening
-        if (Array.isArray(data[attribute])) {
+        // if the value is not an object or is an array
+        if (typeof data[attribute] !== 'object' || Array.isArray(data[attribute])) {
             result[newKey] = nestedObjectFlattening(data[attribute], lowerCase, prefix, separator);
             continue;
         }
 
-        // if the value is an object, recursively call nestedObjectFlattening
-        if (typeof data[attribute] === 'object') {
-            result = {
-                ...result,
-                ...nestedObjectFlattening(data[attribute], lowerCase, `${newKey}${separator}`, separator)
-            };
-            continue;
-        }
-
-        // otherwise return as it is
-        result[newKey] = nestedObjectFlattening(data[attribute], lowerCase, prefix, separator);
+        // otherwise, recursively call objectFlattening
+        const flattenedObject = nestedObjectFlattening(data[attribute], lowerCase, `${newKey}${separator}`, separator);
+        result = { ...result, ...flattenedObject };
 
     }
 
