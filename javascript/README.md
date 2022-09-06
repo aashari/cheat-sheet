@@ -3,8 +3,9 @@
 ## Documentation
 
 ### Nested Object Flattening
-Sometimes we want to make the nested object into a single level object, this is how to make object flat or how to flattening the nested object, example:
+Sometimes we want to make the nested object into a single level object, this is how to make object flat or how to flattening the nested object
 
+**Example:**
 ```
 const result = nestedObjectFlattening({
     "data": {
@@ -41,9 +42,10 @@ const result = nestedObjectFlattening({
         "durability": "PERMANENT"
     }
 });
+```
 
-console.debug(result)
-
+**Output:**
+```
 /*{
   'data.info.account_id': '1234567890',
   'data.info.environment': 'staging',
