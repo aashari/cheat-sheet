@@ -2,7 +2,24 @@
 
 ## Documentation
 
+### AWS SDK DynamoDB
+
+//todo
+
+**Example:**
+
+```Javascript
+//todo
+```
+
+**Output:**
+
+```Javascript
+//todo
+```
+
 ### Nested Object Flattening
+
 Sometimes we want to make the nested object into a single level object, this is how to make object flat or how to flattening the nested object, I usually use this function to store data into OpenSearch/ElasticSearch one of the use case on this is to help to prevent the mismatch data structure
 
 **Example:**
