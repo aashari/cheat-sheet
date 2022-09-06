@@ -46,7 +46,7 @@ const result = nestedObjectFlattening({
 
 **Output:**
 ```
-/*{
+{
   'data.info.account_id': '1234567890',
   'data.info.environment': 'staging',
   'data.info.region': 'ap-southeast-3',
@@ -70,5 +70,5 @@ const result = nestedObjectFlattening({
   'error.bytes_wanted': 4133016152,
   'error.bytes_limit': 3978238361,
   'error.durability': 'PERMANENT'
-}*/
+}
 ```
