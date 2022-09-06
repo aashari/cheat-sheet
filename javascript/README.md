@@ -6,7 +6,8 @@
 Sometimes we want to make the nested object into a single level object, this is how to make object flat or how to flattening the nested object, I usually use this function to store data into OpenSearch/ElasticSearch one of the use case on this is to help to prevent the mismatch data structure
 
 **Example:**
-```
+
+```Javascript
 const result = nestedObjectFlattening({
     "data": {
         "info": {
@@ -45,7 +46,8 @@ const result = nestedObjectFlattening({
 ```
 
 **Output:**
-```
+
+```Javascript
 {
   'data.info.account_id': '1234567890',
   'data.info.environment': 'staging',
